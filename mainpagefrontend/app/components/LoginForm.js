@@ -1,8 +1,10 @@
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function LoginForm() {
+   
     const router = useRouter();
     let visible = false;
     function textUp(event) {
@@ -32,6 +34,10 @@ export default function LoginForm() {
     function submitHandler(e) {
         e.preventDefault();
         if(!(e.target.form[0].value==""|| e.target.form[1].value == "")) {
+            localStorage.setItem('user',{
+                username:e.target.form[0].value,
+                password:e.target.form[1].value
+            })
             router.push('/');
         }else{
             alert("Please fill in all fields");

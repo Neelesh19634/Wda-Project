@@ -4,7 +4,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navbar({data}) {
     const router = useRouter();
@@ -12,8 +12,16 @@ export default function Navbar({data}) {
     function loginHandler(e) {
         e.preventDefault();
         router.push("/login");
-        setLogined(true);
     }
+    useEffect(()=>{
+        const res=localStorage.getItem('user');
+        if(res){
+            setLogined(true);            
+            
+        }else{
+            setLogined(false);
+        }
+    })
     return (
         <div>
             <div id="header" >
@@ -36,7 +44,7 @@ export default function Navbar({data}) {
                             <SettingsIcon className='SettingsIcon' />
                         </div>
                     </div>
-                        <div id="profile">
+                        <div id="profile" onClick={()=>data.setHeroCenter("profile")}>
                             {logined && 
                             <PersonIcon />||
                             <span className='loginBtn' onClick={loginHandler}>Login</span>

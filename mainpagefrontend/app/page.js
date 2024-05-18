@@ -4,7 +4,9 @@ import Sidebar from "./components/Sidebar"
 import Posts from "./components/Posts"
 import Chatbox from "./components/Chatbox"
 import Interests from "./components/Interests"
+
 import { useState } from "react"
+import Profile from "./components/Profile"
 
 
 
@@ -21,7 +23,7 @@ function HeroCenter({ data }) {
     (data.heroCenter == "interest"
       &&
       <Interests data={{ interest: data.interest, setInterest: data.setInterest, posts: data.posts, interests: data.interests }} />
-    )
+     || <Profile data={{posts: data.posts }}/>) 
   );
 }
 
